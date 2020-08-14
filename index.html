@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        var stringFromPrompt = prompt("Enter one of three options: \nRock, Paper, Scissors (without mistakes, please!)")
+
+        var playerSelection = stringFromPrompt.toLowerCase();
+        console.log("You selected " + playerSelection);
+        var initialOptions = ["rock", "paper", "scissors"];
+        var computerSelection = "";
+
+        function getRndInteger(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        var index = initialOptions.indexOf(playerSelection);
+        console.log("Index: " + index)
+        initialOptions.splice(index, 1);
+        console.log("Options for computer: " + initialOptions);
+
+        function compSelection() {
+            var rand = getRndInteger(0, 2);
+            console.log("Random number: " + rand);
+            computerSelection = initialOptions[rand];
+            console.log("computerSelection: " + computerSelection);
+        }
+
+        function game() {
+            if(playerSelection == "rock" && computerSelection == "paper") {
+                console.log("You Lose! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Paper beats Rock");
+            } else if(playerSelection == "paper" && computerSelection == "rock") {
+                console.log("You Won! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Paper beats Rock");
+            } else if(playerSelection == "rock" && computerSelection == "scissors") {
+                console.log("You Won! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Rock beats Scissors");
+            } else if(playerSelection == "scissors" && computerSelection == "rock") {
+                console.log("You Lose! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Rock beats Scissors");
+            } else if(playerSelection == "scissors" && computerSelection == "paper") {
+                console.log("You Won! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Scissors beats Paper");
+            } else if(playerSelection == "paper" && computerSelection == "scissors") {
+                console.log("You Lose! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Scissors beats Paper");
+            }
+        }
+
+        compSelection();
+        game();
+
+        // const playerSelection = 'rock'
+        // const computerSelection = computerPlay()
+
+        // function game() {
+
+        // }
+
+        // console.log(playRound(playerSelection, computerSelection))
+    </script>
+
+</body>
+
+</html>
