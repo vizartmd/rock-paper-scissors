@@ -1,0 +1,114 @@
+body {
+    background-color: black;
+    background-image: url('https://media.giphy.com/media/26xBzu2ogAunL19hS/giphy.gif');
+    background-size: cover;
+    padding-top: 100px;
+}
+
+.battle {
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.start {
+    margin: 20px auto;
+    justify-content: center;
+}
+
+.score {
+    margin: 20px auto;
+    justify-content: center;
+    flex-grow: 4;
+}
+
+.circle {
+    width: 80px;
+    height: 80px;
+    border: 8px solid #00ccff;
+    background-color: rgb(255, 252, 56);
+    border-radius: 20%;
+    padding: 10px;
+    margin: 0 25px;
+    text-align: center;
+    font-size: 1px;
+    color: #5A0081;
+
+}
+
+.buttons {
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center
+}
+
+.col-md-3 {
+    max-width: none;
+}
+
+.my-chose {
+    border: 15px solid rgb(255, 252, 56);
+    border-radius: 100%;
+    width: 250px;
+    height: 250px;
+}
+
+.comp-chose {
+    border: 15px solid rgb(255, 252, 56);
+    border-radius: 100%;
+    width: 250px;
+    height: 250px;
+}
+
+.win {
+    width: 200px;
+    height: 200px;
+    margin-top: 25px;
+    visibility: hidden;
+}
+
+.circle>h3 {
+    margin-top: 6px;
+    font-weight: 800;
+}
+
+.my-score {
+    margin-right: 10px;
+}
+
+.comp-score {
+    margin-left: 10px;
+}
+
+.sel-button {
+    border: 7px solid rgb(255, 252, 56);
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+}
+
+.selected {
+    border: 7px solid #00ccff;
+    transform: scale(0.9);
+}
+
+.sel-button:hover {
+    cursor: pointer;
+}
+
+.start-game {
+    display: none;
+    width: 100%;
+    padding: 15px 20px;
+    color: rgb(255, 252, 56);
+    font-weight: 800;
+    background-color: black;
+    border-radius: 15px;
+    border: 7px solid #00ccff;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.start-button {
+    display: flex;
+}

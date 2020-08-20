@@ -3,63 +3,214 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Rock Paper Scissors</title>
 </head>
 
 <body>
+    <div class="container col-md-offset-3 col-md-6">
+        <div class="row score">
+            <div id="myScore" class="my-score">
+            </div>
+            <div id="myCircle" class="circle">
+            </div>
+            <div id="compCircle" class="circle">
+            </div>
+            <div id="compScore" class="comp-score">
+            </div>
+        </div>
+        <div class="row battle">
+            <div class="col-sm col-md-3">
+                <img id="myAnswer" src="img/left_rock.png" class="my-chose">
+            </div>
+            <div class="col-sm col-md-3">
+                <img id="compAnswer" src="img/right_paper.png" class="comp-chose">
+            </div>
+        </div>
+        <div class="row start" id="start">
+            <div class="col-sm col-md-2 buttons">
+                <img id="rock" src="img/left_rock.png" class="sel-button selected">
+            </div>
+            <div class="col-sm col-md-2 buttons">
+                <img id="scissors" src="img/left_scissors.png" class="sel-button selected">
+            </div>
+            <div class="col-sm col-md-2 buttons">
+                <img id="paper" src="img/left_paper.png" class="sel-button selected">
+            </div>
+        </div>
+        <div class="row start-button col-md-4 offset-md-4">
+            <input type="button" value="Start New Game" id="start-game" class="start-game">
+        </div>
+    </div>
 
     <script>
-        var stringFromPrompt = prompt("Enter one of three options: \nRock, Paper, Scissors (without mistakes, please!)")
-
-        var playerSelection = stringFromPrompt.toLowerCase();
-        console.log("You selected " + playerSelection);
+        var rock = document.getElementById('rock');
+        var scissors = document.getElementById('scissors');
+        var paper = document.getElementById('paper');
+        var myAnswer = document.getElementById('myAnswer');
+        var compAnswer = document.getElementById('compAnswer');
+        var playerSelection = '';
         var initialOptions = ["rock", "paper", "scissors"];
         var computerSelection = "";
+        var myScore = document.getElementById('myScore');
+        var compScore = document.getElementById('compScore');
+        var myCircle = document.getElementById('myCircle');
+        var compCircle = document.getElementById('compCircle');
+        var selButton = document.querySelectorAll('sel-button');
+        var winner = document.getElementById('win');
+        var start = document.getElementById('start');
+        var startGame = document.getElementById('start-game');
+        var mScore = 0;
+        var cScore = 0;
+        var win = "";
+
+        const mh3 = document.createElement('h3');
+        mh3.textContent = mScore;
+        myCircle.appendChild(mh3);
+
+        const ch3 = document.createElement('h3');
+        ch3.textContent = cScore;
+        compCircle.appendChild(ch3);
+
+        rock.addEventListener('click', (e) => {
+            myAnswer.src = "img/empty.png";
+            setTimeout(function () {
+                myAnswer.src = "img/left_rock.png";
+                playerSelection = 'rock';
+                rock.classList.add('selected');
+                game();
+            }, 150);
+            setTimeout(function () {
+                rock.classList.remove('selected');
+            }, 50);
+        });
+        scissors.addEventListener('click', (e) => {
+            myAnswer.src = "img/empty.png";
+            setTimeout(function () {
+                myAnswer.src = "img/left_scissors.png";
+                playerSelection = 'scissors';
+                scissors.classList.add('selected');
+                game();
+            }, 150);
+            setTimeout(function () {
+                scissors.classList.remove('selected');
+            }, 50);
+        });
+        paper.addEventListener('click', (e) => {
+            myAnswer.src = "img/empty.png";
+            setTimeout(function () {
+                myAnswer.src = "img/left_paper.png";
+                playerSelection = 'paper';
+                paper.classList.add('selected');
+                game();
+            }, 150);
+            setTimeout(function () {
+                paper.classList.remove('selected');
+            }, 50);
+        });
+
+        startGame.addEventListener('click', () => {
+            winner.style.visibility = 'hidden';
+            start.style.display = 'flex';
+            startGame.style.display = 'none';
+            changeScore('');
+            document.body.style.backgroundImage = "url(https://media.giphy.com/media/26xBzu2ogAunL19hS/giphy.gif)";
+        });
 
         function getRndInteger(min, max) {
             return Math.floor(Math.random() * (max - min)) + min;
         }
 
-        var index = initialOptions.indexOf(playerSelection);
-        console.log("Index: " + index)
-        initialOptions.splice(index, 1);
-        console.log("Options for computer: " + initialOptions);
-
         function compSelection() {
-            var rand = getRndInteger(0, 2);
+            compAnswer.src = "img/empty.png";
+            var rand = getRndInteger(0, 3);
             console.log("Random number: " + rand);
             computerSelection = initialOptions[rand];
             console.log("computerSelection: " + computerSelection);
         }
 
-        function game() {
-            if(playerSelection == "rock" && computerSelection == "paper") {
-                console.log("You Lose! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Paper beats Rock");
-            } else if(playerSelection == "paper" && computerSelection == "rock") {
-                console.log("You Won! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Paper beats Rock");
-            } else if(playerSelection == "rock" && computerSelection == "scissors") {
-                console.log("You Won! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Rock beats Scissors");
-            } else if(playerSelection == "scissors" && computerSelection == "rock") {
-                console.log("You Lose! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Rock beats Scissors");
-            } else if(playerSelection == "scissors" && computerSelection == "paper") {
-                console.log("You Won! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Scissors beats Paper");
-            } else if(playerSelection == "paper" && computerSelection == "scissors") {
-                console.log("You Lose! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Scissors beats Paper");
+        function changeScore(score) {
+            if (score == 'me') {
+                mScore++;
+                console.log('mScore; ' + mScore);
+                mh3.textContent = mScore;
+                if (mScore == 10) {
+                    win = 'me';
+                    gameOver(win);
+                }
+            } else if (score == 'comp') {
+                cScore++;
+                console.log('cScore; ' + cScore);
+                ch3.textContent = cScore;
+                if (cScore == 10) {
+                    win = 'comp';
+                    gameOver(win);
+                }
+            } else if (score == '') {
+                mScore = 0;
+                cScore = 0;
+                mh3.textContent = mScore;
+                ch3.textContent = cScore;
+
             }
         }
 
-        compSelection();
-        game();
+        function gameOver(win) {
+            start.style.display = 'none';
+            startGame.style.display = 'block';
+            document.body.style.backgroundImage = "url('https://media.giphy.com/media/fxnF2NswlLlxvwGYEn/source.gif')";
+        }
 
-        // const playerSelection = 'rock'
-        // const computerSelection = computerPlay()
+        function game() {
+            compSelection();
+            if (playerSelection == computerSelection) {
+                setTimeout(function () {
+                    console.log("It is tie! You selected " + playerSelection + " and the Computer has selected also " + computerSelection);
+                    compAnswer.src = "img/right_" + computerSelection + ".png";
+                }, 150);
+            } else if (playerSelection == "rock" && computerSelection == "paper") {
+                setTimeout(function () {
+                    console.log("You Lose! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Paper beats Rock");
+                    compAnswer.src = "img/right_" + computerSelection + ".png";
+                    changeScore('comp');
+                }, 150);
+            } else if (playerSelection == "paper" && computerSelection == "rock") {
+                setTimeout(function () {
+                    console.log("You Won! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Paper beats Rock");
+                    compAnswer.src = "img/right_" + computerSelection + ".png";
+                    changeScore('me');
+                }, 150);
+            } else if (playerSelection == "rock" && computerSelection == "scissors") {
+                setTimeout(function () {
+                    console.log("You Won! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Rock beats Scissors");
+                    compAnswer.src = "img/right_" + computerSelection + ".png";
+                    changeScore('me');
+                }, 150);
+            } else if (playerSelection == "scissors" && computerSelection == "rock") {
+                setTimeout(function () {
+                    console.log("You Lose! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Rock beats Scissors");
+                    compAnswer.src = "img/right_" + computerSelection + ".png";
+                    changeScore('comp');
+                }, 150);
+            } else if (playerSelection == "scissors" && computerSelection == "paper") {
+                setTimeout(function () {
+                    console.log("You Won! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Scissors beats Paper");
+                    compAnswer.src = "img/right_" + computerSelection + ".png";
+                }, 150);
+                changeScore('me');
+            } else if (playerSelection == "paper" && computerSelection == "scissors") {
+                setTimeout(function () {
+                    console.log("You Lose! You selected " + playerSelection + " but the Computer has selected " + computerSelection + ". Scissors beats Paper");
+                    compAnswer.src = "img/right_" + computerSelection + ".png";
+                    changeScore('comp');
+                }, 150);
+            }
+        }
 
-        // function game() {
-
-        // }
-
-        // console.log(playRound(playerSelection, computerSelection))
     </script>
 
 </body>
