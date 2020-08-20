@@ -60,13 +60,6 @@ body {
     height: 250px;
 }
 
-.win {
-    width: 200px;
-    height: 200px;
-    margin-top: 25px;
-    visibility: hidden;
-}
-
 .circle>h3 {
     margin-top: 6px;
     font-weight: 800;
